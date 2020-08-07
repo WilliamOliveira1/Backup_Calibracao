@@ -14,6 +14,45 @@ namespace WF_ModernUI
     public partial class Form1 : Form
     {
         string nomeComputador = Environment.MachineName;
+
+        public void createBackup()
+        {
+            try
+            {
+                DateTime dataAgora = DateTime.Now;
+                string data = String.Format("{0:dd_MM_yyyy}", dataAgora);
+                string path = "D:\\" + nomeComputador + "\\" + data; //nome do diretorio a ser criado
+                if (Directory.Exists(path))
+                {
+                    MessageBox.Show("Pasta de backup ja existente");
+                }
+                if (!Directory.Exists(path))
+                {
+                    string curFile = @"c:\arquivo.txt";
+                    if (File.Exists(curFile))
+                    {
+                        //Criamos um com o nome folder
+                        Directory.CreateDirectory(path);
+                        File.Copy(@"C:\arquivo.txt", "D:\\" + nomeComputador + "\\" + data + "\\pathloss.csv");
+                        MessageBox.Show("Arquivo de calibração da jiga WFFT01 copiado");
+                    }
+                    else
+                    {
+                        MessageBox.Show("não existe arquivo pathloss.csv no diretório D:\\");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao gerar backup!");
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                string ex1 = ex.ToString();
+                MessageBox.Show("Arquivo não localizado ou não existente!\n"+ex1);
+            }
+        }
         
 
         public Form1()
@@ -47,69 +86,46 @@ namespace WF_ModernUI
             switch (comboBox1.Text)
             {
                 case "DESKTOP-S4H6C5I":
-                    try
-                    {
-                        DateTime dataAgora = DateTime.Now;
-                        string data = String.Format("{0:dd_MM_yyyy}", dataAgora);
-                        string path = "d:\\" + data; //nome do diretorio a ser criado
-                        if (Directory.Exists(path))
-                        {
-                            MessageBox.Show("Pasta de backup ja existente");
-                        }
-                        if (!Directory.Exists(path))
-                        {
-                            //Criamos um com o nome folder
-                            Directory.CreateDirectory(path);
-                            File.Copy(@"C:\arquivo.txt", "D:\\" + data + "\\arquivo.txt");
-                            MessageBox.Show("Arquivo de calibração da jiga WFFT01 copiado");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Erro ao gerar backup!");
-                        }
-                    }catch
-                    {
-                        MessageBox.Show("erro!");
-                    }
+                    createBackup();
                     break;
                 case "WFFT02":
-                    MessageBox.Show("WFFT02");
+
                     break;
                 case "WFFT03":
-                    MessageBox.Show("WFFT03");
+                    createBackup();
                     break;
                 case "WFFT04":
-                    MessageBox.Show("WFFT04");
+                    createBackup();
                     break;
                 case "WFFT05":
-                    MessageBox.Show("WFFT05");
+                    createBackup();
                     break;
                 case "WFFT06":
-                    MessageBox.Show("WFFT06");
+                    createBackup();
                     break;
                 case "WFFT07":
-                    MessageBox.Show("WFFT07");
+                    createBackup();
                     break;
                 case "WFFT12":
-                    MessageBox.Show("WFFT12");
+                    createBackup();
                     break;
                 case "WFFT13":
-                    MessageBox.Show("WFFT13");
+                    createBackup();
                     break;
                 case "WFFT15":
-                    MessageBox.Show("WFFT15");
+                    createBackup();
                     break;
                 case "WFFT16":
-                    MessageBox.Show("WFFT16");
+                    createBackup();
                     break;
                 case "FOQM":
-                    MessageBox.Show("FOQM");
+                    createBackup();
                     break;
                 case "FOQM01":
-                    MessageBox.Show("FOQM01");
+                    createBackup();
                     break;
                 case "FOQM02":
-                    MessageBox.Show("FOQM02");
+                    createBackup();
                     break;
                 default:
                     MessageBox.Show("Selecione uma jiga valida");
@@ -123,6 +139,11 @@ namespace WF_ModernUI
             {
                 this.button1.Enabled = true;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
