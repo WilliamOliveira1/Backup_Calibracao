@@ -21,19 +21,19 @@ namespace WF_ModernUI
             {
                 DateTime dataAgora = DateTime.Now;
                 string data = String.Format("{0:dd_MM_yyyy}", dataAgora);
-                string path = "D:\\" + nomeComputador + "\\" + data; //nome do diretorio a ser criado
+                string path = "S:\\" + "backup_arquivos_de_calibração" + nomeComputador + "\\" + data; //nome do diretorio a ser criado
                 if (Directory.Exists(path))
                 {
                     MessageBox.Show("Pasta de backup ja existente");
                 }
                 if (!Directory.Exists(path))
                 {
-                    string curFile = @"c:\arquivo.txt";
+                    string curFile = @"d:\pathloss.csv";
                     if (File.Exists(curFile))
                     {
                         //Criamos um com o nome folder
                         Directory.CreateDirectory(path);
-                        File.Copy(@"C:\arquivo.txt", "D:\\" + nomeComputador + "\\" + data + "\\pathloss.csv");
+                        File.Copy(@"d:\pathloss.csv", "S:\\" + "backup_arquivos_de_calibração" + nomeComputador + "\\" + data + "\\pathloss.csv");
                         MessageBox.Show("Arquivo de calibração da jiga WFFT01 copiado");
                     }
                     else
@@ -85,7 +85,7 @@ namespace WF_ModernUI
 
             switch (comboBox1.Text)
             {
-                case "DESKTOP-S4H6C5I":
+                case "WFFT01":
                     createBackup();
                     break;
                 case "WFFT02":
